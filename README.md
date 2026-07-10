@@ -1,20 +1,20 @@
 # Voxflow
 
-**Hassan Khan**
+Built by **Hassan Khan**.
 
-Video answers bina meeting schedule kiye collect karo. Flow banao, link share karo, log apni marzi se record karke jawab dein. Har answer ke baad AI follow-up pooch sakta hai aur dashboard mein summary milti hai.
+Collect video answers without scheduling meetings. Create a flow, share a link, and people record responses on their own time. AI can ask a follow-up after each answer and summarize responses in the dashboard.
 
 ## Problem
 
-Hiring, sales, ya feedback ke liye bar bar calls schedule karna slow hota hai. Voxflow ek link deta hai — respondent browser se video/audio/text answer record karta hai, aap dashboard se sab dekhte ho.
+Hiring, sales, and feedback often get stuck on calendar back-and-forth. Voxflow replaces that with a single link — respondents record video, audio, or text answers in the browser, and you review everything from the dashboard.
 
-## Kya karta hai
+## Features
 
-- Flow builder — video, audio, text questions
-- Public link — `/f/your-slug` par koi bhi respond kar sakta hai
-- Recording — browser camera/mic se record ya file upload
-- AI — optional follow-up questions aur response summary
-- Dashboard — responses, analytics, notes
+- **Flow builder** — video, audio, and text questions
+- **Public link** — anyone can respond at `/f/your-slug`
+- **Recording** — record from camera/mic or upload a file
+- **AI** — optional follow-up questions and response summaries
+- **Dashboard** — responses, analytics, and notes
 
 ## Tech
 
@@ -27,7 +27,7 @@ Hiring, sales, ya feedback ke liye bar bar calls schedule karna slow hota hai. V
 
 ## Setup
 
-Docker, Node 20+, aur npm chahiye.
+You need Docker, Node.js 20+, and npm.
 
 ```bash
 git clone https://github.com/Hassankhand10/voxflow.git
@@ -51,22 +51,22 @@ npm run dev
 - App: http://localhost:3000  
 - API: http://localhost:4000/api  
 
-**Demo:** `demo@voxflow.app` / `password123`  
-**Sample flow:** http://localhost:3000/f/senior-react-dev
+**Demo login:** `demo@voxflow.app` / `password123`  
+**Sample public flow:** http://localhost:3000/f/senior-react-dev
 
 ## OpenAI (optional)
 
-`backend/.env` mein `OPENAI_API_KEY` add karo. Bina key ke bhi app chalegi — follow-up aur summary ke liye fallback logic hai.
+Add `OPENAI_API_KEY` in `backend/.env` for real follow-up questions and summaries. Without a key, the app still works using built-in fallback logic.
 
-## Useful commands
+## Commands
 
 ```bash
 npm run dev          # frontend + API
 npm run docker:up    # postgres + redis
-npm run db:seed      # demo data reset
+npm run db:seed      # reset demo data
 ```
 
-## Structure
+## Project structure
 
 ```
 voxflow/
