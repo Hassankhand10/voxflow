@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Voxflow
 
-## Getting Started
+**Hassan Khan**
 
-First, run the development server:
+Video answers bina meeting schedule kiye collect karo. Flow banao, link share karo, log apni marzi se record karke jawab dein. Har answer ke baad AI follow-up pooch sakta hai aur dashboard mein summary milti hai.
+
+## Problem
+
+Hiring, sales, ya feedback ke liye bar bar calls schedule karna slow hota hai. Voxflow ek link deta hai — respondent browser se video/audio/text answer record karta hai, aap dashboard se sab dekhte ho.
+
+## Kya karta hai
+
+- Flow builder — video, audio, text questions
+- Public link — `/f/your-slug` par koi bhi respond kar sakta hai
+- Recording — browser camera/mic se record ya file upload
+- AI — optional follow-up questions aur response summary
+- Dashboard — responses, analytics, notes
+
+## Tech
+
+| Part | Stack |
+|------|-------|
+| Frontend | Next.js, TypeScript, Tailwind |
+| Backend | NestJS, Prisma |
+| Database | PostgreSQL |
+| Queue | Redis (AI processing) |
+
+## Setup
+
+Docker, Node 20+, aur npm chahiye.
 
 ```bash
+git clone https://github.com/Hassankhand10/voxflow.git
+cd voxflow
+
+docker compose up -d
+
+cd backend
+cp .env.example .env
+npm install
+npx prisma generate
+npx prisma migrate dev
+npx prisma db seed
+cd ..
+
+cp .env.example .env.local
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- App: http://localhost:3000  
+- API: http://localhost:4000/api  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Demo:** `demo@voxflow.app` / `password123`  
+**Sample flow:** http://localhost:3000/f/senior-react-dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## OpenAI (optional)
 
-## Learn More
+`backend/.env` mein `OPENAI_API_KEY` add karo. Bina key ke bhi app chalegi — follow-up aur summary ke liye fallback logic hai.
 
-To learn more about Next.js, take a look at the following resources:
+## Useful commands
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run dev          # frontend + API
+npm run docker:up    # postgres + redis
+npm run db:seed      # demo data reset
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Structure
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+voxflow/
+├── src/           Next.js app
+├── backend/       NestJS API
+└── docker-compose.yml
+```
